@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido - M-PESA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .header img {
+            max-width: 150px;
+        }
+
+        .pedido-detalhes {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .pedido-detalhes p {
+            margin: 10px 0;
+        }
+
+        .pedido-detalhes strong {
+            color: #333;
+        }
+
+        .sms-btn {
+            display: block;
+            background-color: #00aa55;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .sms-btn:hover {
+            background-color: #008f44;
+        }
+
+        .transferencia-procedimento {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .transferencia-procedimento h2 {
+            color: red;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .transferencia-procedimento ol {
+            padding-left: 20px;
+        }
+
+        .transferencia-procedimento li {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Vodacom_logo.svg/1200px-Vodacom_logo.svg.png" alt="Vodacom Logo">
+            <h1>Detalhes do Pedido</h1>
+        </div>
+
+        <div class="pedido-detalhes">
+            <p><strong>Nome do Banco:</strong> M-PESA</p>
+            <p><strong>Contas Financeiras:</strong> 853349601</p>
+            <p><strong>Resultado:</strong> MZN 600</p>
+        </div>
+
+        <a href="#" class="sms-btn">Clique para inserir o código de identificação SMS</a>
+
+        <div class="transferencia-procedimento">
+            <h2>Processo de Transferência M-PESA</h2>
+            <ol>
+                <li>Disque *150#</li>
+                <li>Selecione 1 "Transferir Dinheiro"</li>
+                <li>Selecione 1 "M-PESA"</li>
+                <li>Digite o número: 853349601</li>
+                <li>Insira o valor: MZN 600</li>
+                <li>Insira o PIN</li>
+                <li>Selecione 1 e confirme</li>
+                <li>Após a conclusão da transferência, copie o código da transação do SMS e cole no campo indicado</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html> 

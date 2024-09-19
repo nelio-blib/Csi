@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirar Saldo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        .info {
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .info p {
+            margin: 5px 0;
+        }
+        .instructions {
+            background-color: #fff0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .instructions ol {
+            padding-left: 20px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Retirar</h2>
+
+    <p>Saldo disponível: <span id="saldo">1000</span> MZN</p>
+
+    <label for="banco">Escolha seu banco:</label>
+    <select id="banco">
+        <option value="mpesa">Mpesa</option>
+        <option value="emola">Emola</option>
+    </select>
+
+    <label for="montante">Montante de levantamento:</label>
+    <input type="number" id="montante" value="1500" readonly>
+
+    <div class="info">
+        <p>Taxa de gestão: 9.00 MZN</p>
+        <p>Taxa de levantamento: 10%</p>
+        <p>Valor mínimo de levantamento: 1500 MZN</p>
+    </div>
+
+    <button id="levantar">Levantar</button>
+
+    <div class="instructions">
+        <ol>
+            <li>Prazo de levantamento: a qualquer momento</li>
+            <li>Taxa de levantamento: 10%</li>
+            <li>Valor mínimo de levantamento: 1500 MZN</li>
+            <li>Se o levantamento falhar, verifique se as informações bancárias estão corretas e tente novamente</li>
+        </ol>
+    </div>
+
+    <div class="error" id="error"></div>
+</div>
+
+<script>
+    document.getElementById('levantar').addEventListener('click', function() {
+        var saldo = parseInt(document.getElementById('saldo').textContent);
+        var montante = parseInt(document.getElementById('montante').value);
+        var errorDiv = document.getElementById('error');
+
+        if (saldo < montante) {
+            errorDiv.textContent = 'Saldo insuficiente. O montante mínimo é 1500 MZN.';
+        } else {
+            errorDiv.textContent = '';
+            alert('Levantamento realizado com sucesso!');
+        }
+    });
+</script>
+
+</body>
+</html>

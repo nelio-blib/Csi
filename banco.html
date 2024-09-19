@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o Banco</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f05454;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        h2 {
+            margin: 20px 0;
+            color: #333;
+        }
+        p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .price-info {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #f05454;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d64545;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <img src="drone1.png" alt="drone">
+        </div>
+        <h2>Escolha o banco</h2>
+        <p>As transferências do mesmo banco terão prioridade, as transferências de bancos diferentes terão prioridade para pagamento instantâneo.</p>
+        
+        <!-- Exibição do valor a ser pago -->
+        <div class="price-info">
+            Você precisará pagar: <strong id="price">0.00</strong>
+        </div>
+        
+        <select id="paymentMethod">
+            <option value="mpesa">M-Pesa</option>
+            <option value="emola">Emola</option>
+        </select>
+        <button onclick="redirect()">Confirmar Pagamento</button>
+    </div>
+
+    <script>
+        // Recuperar o valor do produto do localStorage
+        const price = localStorage.getItem('price');
+        const vipLevel = localStorage.getItem('vipLevel');
+
+        // Exibir o valor no HTML
+        document.getElementById('price').textContent = price + " MZN";
+
+        function redirect() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            
+            // Redirecionar para a página correta com base no banco escolhido
+            if (paymentMethod === 'mpesa') {
+                window.location.href = 'mpesa.html';
+            } else if (paymentMethod === 'emola') {
+                window.location.href = 'emola.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

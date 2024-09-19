@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Produtos - Blue Sky Drones</title>
+
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAhcjUiWlThBiYQpTK_G6f_OXaygJcmex0",
+            authDomain: "ctia-f6eea.firebaseapp.com",
+            projectId: "ctia-f6eea",
+            storageBucket: "ctia-f6eea.appspot.com",
+            messagingSenderId: "403370334139",
+            appId: "1:101127036846:android:dd963c962e4af5c1a5323f"
+        };
+        // Inicializando o Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .vip-card {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vip-card h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .vip-card img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .vip-card p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+
+        .vip-card strong {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="produtos-container">
+        
+    </div>
+
+    <script>
+        // Verificar produtos não ativos
+        db.collection("users").doc("user_id_aqui").get().then((doc) => {
+            if (doc.exists) {
+                let planoAtivo = doc.data().planoAtivo;
+                let produtos = ["VIP1", "VIP2", "VIP3", "VIP4"];
+                let container = document.getElementById('produtos-container');
+
+                produtos.forEach((produto) => {
+                    if (produto !== planoAtivo) {
+                        let produtoCard = `
+                        <div class="vip-card">
+                            <h3>${produto}</h3>
+                            <img src="drone${produtos.indexOf(produto)+1}.png" alt="Drone ${produto}">
+                            <p>Renda diária: <strong>${produto === 'VIP1' ? '150.00' : produto === 'VIP2' ? '300.00' : produto === 'VIP3' ? '500.00' : '800.00'}</strong></p>
+                            <p>Dias válidos: <strong>60 Dias</strong></p>
+                            <p>Preço: <strong>${produto === 'VIP1' ? '500.00' : produto === 'VIP2' ? '1000.00' : produto === 'VIP3' ? '1500.00' : '2500.00'}</strong></p>
+                        </div>
+                        `;
+                        container.innerHTML += produtoCard;
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

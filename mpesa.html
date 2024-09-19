@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f04d37;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        h2 {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .details p {
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .details p span {
+            font-weight: bold;
+        }
+        .copy-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .transaction {
+            margin-bottom: 20px;
+        }
+        .transaction label {
+            font-size: 14px;
+            color: #555;
+        }
+        .transaction input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #d62c1a;
+        }
+        .alert {
+            color: #d62c1a;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // Função para obter vipLevel e price do localStorage e exibir
+        window.onload = function() {
+            // Obter os dados do localStorage
+            var vipLevel = localStorage.getItem('vipLevel');
+            var price = localStorage.getItem('price');
+
+            // Verificar e exibir o nível VIP e o preço
+            if (vipLevel) {
+                document.getElementById('vip-level').innerText = vipLevel;
+            } else {
+                document.getElementById('vip-level').innerText = 'Nível VIP não disponível';
+            }
+
+            if (price) {
+                document.getElementById('product-price').innerText = price;
+            } else {
+                document.getElementById('product-price').innerText = 'Preço não disponível';
+            }
+        };
+
+        // Função para enviar o ID da transação via WhatsApp
+        function enviarWhatsApp() {
+            var transactionId = document.getElementById("transaction-id").value;
+            if (transactionId) {
+                var whatsappUrl = "https://wa.me/857081715?text=Olá,%20gostaria%20de%20validar%20o%20seguinte%20ID%20de%20transação:%20" + transactionId;
+                window.open(whatsappUrl, "_blank");
+            } else {
+                document.getElementById("alert-msg").innerText = "Por favor, insira o ID da transação.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="mpesa.png" alt="M-Pesa">
+        </div>
+        <h2>Etapa 1: Detalhes do Pedido</h2>
+        <div class="details">
+            <p><span>Nome do banco:</span> Mpesa</p>
+            <p><span>Beneficiário:</span> TAIMO RICARDO <button class="copy-btn" onclick="navigator.clipboard.writeText('TAIMO RICARDO')">Copiar</button></p>
+            <p><span>Conta:</span> 857081715 <button class="copy-btn" onclick="navigator.clipboard.writeText('857081715')">Copiar</button></p>
+            <p><span>Quantidade (MT):</span> <span id="product-price">1000</span> <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('product-price').innerText)">Copiar</button></p>
+            <p><span>Nível VIP:</span> <span id="vip-level">Nível VIP não disponível</span></p>
+        </div>
+
+        <h2>Etapa 2: Validação da Transação</h2>
+        <div class="transaction">
+            <label for="transaction-id">ID da Transação</label>
+            <input type="text" id="transaction-id" placeholder="Insira o ID da transação correto">
+        </div>
+
+        <button class="submit-btn" onclick="enviarWhatsApp()">Clique para Enviar o ID da Transação</button>
+
+        <div class="alert" id="alert-msg"></div>
+    </div>
+</body>
+</html>

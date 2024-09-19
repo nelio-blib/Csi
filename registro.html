@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Drone Céu Azul</title>
+
+    <!-- Firebase App (versão compatível) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('drone1.png'); /* Caminho para sua imagem de fundo */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0277bd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Drone Céu Azul - Registro</h2>
+        <input type="text" id="phone" placeholder="+258 Insira o número de telefone" required>
+        <input type="password" id="password" placeholder="Por favor insira a senha" required>
+        <input type="password" id="confirmPassword" placeholder="Confirmar senha" required>
+        <input type="text" id="captcha" placeholder="Código de verificação" required>
+        <button id="registerButton">Registre-se agora</button>
+        <br><br>
+        <button id="loginButton">Login</button> <!-- Botão de login -->
+    </div>
+
+    <script>
+        // Configuração do Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyAhcjUiWlThBiYQpTK_G6f_OXaygJcmex0",
+            authDomain: "ctia-f6eea.firebaseapp.com",
+            projectId: "ctia-f6eea",
+            storageBucket: "ctia-f6eea.appspot.com",
+            messagingSenderId: "403370334139",
+            appId: "1:101127036846:android:dd963c962e4af5c1a5323f"
+        };
+
+        // Inicializando o Firebase
+        firebase.initializeApp(firebaseConfig);
+        var auth = firebase.auth();
+
+        // Definir a persistência da sessão como "local"
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(function() {
+                console.log("Persistência definida como 'local'");
+            })
+            .catch(function(error) {
+                console.error("Erro ao definir persistência:", error);
+            });
+
+        // Função para registrar o usuário
+        document.getElementById('registerButton').addEventListener('click', function () {
+            var phone = document.getElementById('phone').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert("As senhas não correspondem!");
+                return;
+            }
+
+            // Registro com telefone (simulado como email, pois estamos usando o Firebase Email/Password)
+            auth.createUserWithEmailAndPassword(phone + "@dronesystem.com", password)
+                .then(function(userCredential) {
+                    var user = userCredential.user;
+                    alert("Bem-vindo(a) ao Drone Céu Azul, " + phone + "!");
+                    console.log("Usuário registrado:", user);
+
+                    window.location.href = "teste.html"; // Redireciona após registro
+                })
+                .catch(function(error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert("Erro: " + errorMessage);
+                    console.log("Erro:", errorCode, errorMessage);
+                });
+        });
+
+        // Função para redirecionar ao login
+        document.getElementById('loginButton').addEventListener('click', function () {
+            window.location.href = "login.html"; // Página de login
+        });
+    </script>
+
+</body>
+</html>

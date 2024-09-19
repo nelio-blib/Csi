@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Sky Drones</title>
+
+    <!-- Firebase App (versão compatível) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <!-- Configuração Firebase -->
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAhcjUiWlThBiYQpTK_G6f_OXaygJcmex0",
+            authDomain: "ctia-f6eea.firebaseapp.com",
+            projectId: "ctia-f6eea",
+            storageBucket: "ctia-f6eea.appspot.com",
+            messagingSenderId: "403370334139",
+            appId: "1:101127036846:android:dd963c962e4af5c1a5323f"
+        };
+        // Inicializando o Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #f0f8ff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-time {
+            background-color: #d1f7d6;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-icons img {
+            width: 24px;
+            height: auto;
+            margin-left: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .vip-card {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vip-card h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .vip-card img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .vip-card p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+
+        .vip-card strong {
+            color: green;
+        }
+
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #008CBA;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-time"></div>
+        <div class="header-icons">
+            <img src="lte-icon.png" alt="LTE Icon">
+            <img src="battery-icon.png" alt="Battery Icon">
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Cartões VIP -->
+        <div class="vip-card">
+            <h3>VIP1</h3>
+            <img src="drone1.png" alt="Drone VIP1 Laranja">
+            <p>Renda diária: <strong>150.00</strong></p>
+            <p>Dias válidos: <strong>60 Dias</strong></p>
+            <p>Preço: <strong>500.00</strong></p>
+            <button class="buy-button" onclick="buyVIP(500, 'VIP1')">Comprar</button>
+        </div>
+
+        <div class="vip-card">
+            <h3>VIP2</h3>
+            <img src="drone2.png" alt="Drone VIP2">
+            <p>Renda diária: <strong>300.00</strong></p>
+            <p>Dias válidos: <strong>60 Dias</strong></p>
+            <p>Preço: <strong>1000.00</strong></p>
+            <button class="buy-button" onclick="buyVIP(1000, 'VIP2')">Comprar</button>
+        </div>
+
+        <div class="vip-card">
+            <h3>VIP3</h3>
+            <img src="drone3.png" alt="Drone VIP3">
+            <p>Renda diária: <strong>500.00</strong></p>
+            <p>Dias válidos: <strong>60 Dias</strong></p>
+            <p>Preço: <strong>1500.00</strong></p>
+            <button class="buy-button" onclick="buyVIP(1500, 'VIP3')">Comprar</button>
+        </div>
+
+        <div class="vip-card">
+            <h3>VIP4</h3>
+            <img src="drone1.png" alt="Drone VIP4">
+            <p>Renda diária: <strong>800.00</strong></p>
+            <p>Dias válidos: <strong>60 Dias</strong></p>
+            <p>Preço: <strong>2500.00</strong></p>
+            <button class="buy-button" onclick="buyVIP(2500, 'VIP4')">Comprar</button>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <a href="https://example.com/lar">
+            <img src="home.png" alt="Ícone Lar">
+            Lar
+        </a>
+        <a href="produtos.html">
+            <img src="mill.png" alt="Ícone Meus produtos">Meus produtos
+        </a>
+        <a href="https://example.com/equipe">
+            <img src="team.png" alt="Ícone Equipe">
+            Equipe
+        </a>
+        <a href="profile.html">
+            <img src="my.png" alt="Ícone Meu">
+            Meu
+        </a>
+    </div>
+
+    <script>
+        let saldo = 300; // Simulando saldo do usuário
+
+        function buyVIP(price, vipLevel) {
+            localStorage.setItem('vipLevel', vipLevel);  // Armazenando o nível VIP selecionado
+            localStorage.setItem('price', price);        // Armazenando o preço do produto
+            window.location.href = "banco.html";         // Redirecionando para a página de escolha do banco
+        }
+    </script>
+
+</body>
+</html>
